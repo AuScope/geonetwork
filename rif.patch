@@ -1,0 +1,191 @@
+Index: web/src/main/java/org/fao/geonet/kernel/search/LuceneSearcher.java
+===================================================================
+--- web/src/main/java/org/fao/geonet/kernel/search/LuceneSearcher.java	(revision 6113)
++++ web/src/main/java/org/fao/geonet/kernel/search/LuceneSearcher.java	(working copy)
+@@ -611,11 +611,11 @@
+ 
+ 			//--- handle the time elements
+ 
+-			processTimeRange(request.getChild(SearchParameter.DATEFROM), "0000-01-01", request.getChild(SearchParameter.DATETO), "9999-01-01");
++			processTimeRange(request.getChild(SearchParameter.DATEFROM), "0000-01-01", request.getChild(SearchParameter.DATETO), "9999-01-01", dbms);
+ 
+-            processTimeRange(request.getChild(SearchParameter.CREATIONDATEFROM), "0000-01-01", request.getChild(SearchParameter.CREATIONDATETO), "9999-01-01");
+-            processTimeRange(request.getChild(SearchParameter.REVISIONDATEFROM), "0000-01-01", request.getChild(SearchParameter.REVISIONDATETO), "9999-01-01");
+-            processTimeRange(request.getChild(SearchParameter.PUBLICATIONDATEFROM), "0000-01-01", request.getChild(SearchParameter.PUBLICATIONDATETO), "9999-01-01");
++            processTimeRange(request.getChild(SearchParameter.CREATIONDATEFROM), "0000-01-01", request.getChild(SearchParameter.CREATIONDATETO), "9999-01-01", dbms);
++            processTimeRange(request.getChild(SearchParameter.REVISIONDATEFROM), "0000-01-01", request.getChild(SearchParameter.REVISIONDATETO), "9999-01-01", dbms);
++            processTimeRange(request.getChild(SearchParameter.PUBLICATIONDATEFROM), "0000-01-01", request.getChild(SearchParameter.PUBLICATIONDATETO), "9999-01-01", dbms);
+ 
+ 			//--- some other stuff
+ 
+@@ -761,7 +761,7 @@
+      * @param toTime
+      * @param defaultToTime
+      */
+-	private void processTimeRange(Element fromTime, String defaultFromTime, Element toTime, String defaultToTime) {
++	private void processTimeRange(Element fromTime, String defaultFromTime, Element toTime, String defaultToTime, Dbms dbms) throws Exception {
+ 		if (fromTime != null && toTime != null) { 
+ 			if (fromTime.getTextTrim().equals("") && 
+ 								 toTime.getTextTrim().equals("")) {
+@@ -772,10 +772,25 @@
+ 				} else if (toTime.getTextTrim().equals("")) {
+ 					toTime.setText(defaultToTime);
+ 				}
+-				String newFromTime = JODAISODate.parseISODateTime(fromTime.getText());
+-				fromTime.setText(newFromTime);	
+-				String newToTime = JODAISODate.parseISODateTime(toTime.getText());
+-				toTime.setText(newToTime);	
++				// OAI harvest request from external OAI harvester, with fromDate equals
++				// to the ealiestDatestamp,
++				// in this case, set the toDate to the default toDate, so that
++				// harvest all records.
++				String query = "SELECT min(changeDate) as mcd FROM Metadata";
++				List list = dbms.select(query).getChildren();
++				if (list.size() > 0) {
++					Element rec = (Element) list.get(0);
++					String earliestDatestamp = rec.getChildText("mcd");
++					if (fromTime.getText().contains(earliestDatestamp)) {
++						fromTime.setText(defaultFromTime);
++						toTime.setText(defaultToTime);
++						return;
++					}
++				}
++//				String newFromTime = JODAISODate.parseISODateTime(fromTime.getText());
++//				fromTime.setText(newFromTime);	
++//				String newToTime = JODAISODate.parseISODateTime(toTime.getText());
++//				toTime.setText(newToTime);	
+ 			}
+ 		}
+ 	}
+Index: web/src/main/java/org/fao/geonet/services/config/Set.java
+===================================================================
+--- web/src/main/java/org/fao/geonet/services/config/Set.java	(revision 6113)
++++ web/src/main/java/org/fao/geonet/services/config/Set.java	(working copy)
+@@ -142,8 +142,8 @@
+ 		new ConfigEntry(ConfigEntry.Type.INT,    false, "z3950/port",               "system/z3950/port"),
+ 		
+ 		new ConfigEntry(ConfigEntry.Type.INT,    true, "oai/mdmode",                "system/oai/mdmode"),
+-		new ConfigEntry(ConfigEntry.Type.INT,    true, "oai/tokentimeout",          "system/oai/tokentimeout"),
+-		new ConfigEntry(ConfigEntry.Type.INT,    true, "oai/cachesize",             "system/oai/cachesize"),
++		new ConfigEntry(ConfigEntry.Type.INT,    false, "oai/tokentimeout",          "system/oai/tokentimeout"),
++		new ConfigEntry(ConfigEntry.Type.INT,    false, "oai/cachesize",             "system/oai/cachesize"),
+ 
+         new ConfigEntry(ConfigEntry.Type.BOOL,   true,  "autodetect/enable",             "system/autodetect/enable"),
+         new ConfigEntry(ConfigEntry.Type.STRING,   false, "requestedLanguage/only",             "system/requestedLanguage/only"),
+Index: web/src/main/webapp/WEB-INF/config-oai-prefixes.xml
+===================================================================
+--- web/src/main/webapp/WEB-INF/config-oai-prefixes.xml	(revision 6113)
++++ web/src/main/webapp/WEB-INF/config-oai-prefixes.xml	(working copy)
+@@ -7,7 +7,5 @@
+ 	<!-- example of adding a schema to ListMetadataFormats OAI response - this 
+ 	     schema is supported by a converter (rifcs.xsl) in 
+ 	     convert directory of any/all GeoNetwork schemas -->
+-	<!--
+-	<schema prefix="rifcs" nsUrl="http://ands.org.au/standards/rif-cs/registryObjects" schemaLocation="http://services.ands.org.au/home/orca/schemata/registryObjects.xsd"/>
+-	-->
++	<schema prefix="rif" nsUrl="http://ands.org.au/standards/rif-cs/registryObjects" schemaLocation="http://services.ands.org.au/documentation/rifcs/1.3/schema/registryObjects.xsd"/>
+ </schemas>
+Index: web/src/main/webapp/xsl/conversion/OGCWxSGetCapabilitiesto19119/identification.xsl
+===================================================================
+--- web/src/main/webapp/xsl/conversion/OGCWxSGetCapabilitiesto19119/identification.xsl	(revision 6113)
++++ web/src/main/webapp/xsl/conversion/OGCWxSGetCapabilitiesto19119/identification.xsl	(working copy)
+@@ -125,6 +125,42 @@
+ 			</descriptiveKeywords>
+ 		</xsl:for-each>
+ 		
++		<!-- access constraints -->
++		<resourceConstraints>
++			<MD_LegalConstraints>
++				<xsl:choose>
++					<xsl:when test="name(.)='WFS_Capabilities' or $ows='true'">						
++						<xsl:for-each select="ows:ServiceIdentification/ows:AccessConstraints">
++							<accessConstraints>						
++									<gco:CharacterString>
++										<xsl:value-of select="." />
++									</gco:CharacterString>						
++							</accessConstraints>
++						</xsl:for-each>	
++					</xsl:when>
++					<xsl:when test="name(.)='WMT_MS_Capabilities'">						
++						<xsl:for-each select="Service/AccessConstraints">
++							<accessConstraints>							
++									<gco:CharacterString>
++										<xsl:value-of select="." />
++									</gco:CharacterString>						
++							</accessConstraints>
++						</xsl:for-each>
++					</xsl:when>
++					<xsl:otherwise>						
++						<!-- Accessconstraints -->
++						<xsl:for-each select="wcs:Service/wcs:Accessconstraints">
++							<accessConstraints>								
++									<gco:CharacterString>										
++										<xsl:value-of select="." />
++									</gco:CharacterString>							
++							</accessConstraints>
++						</xsl:for-each>
++					</xsl:otherwise>
++				</xsl:choose>
++			</MD_LegalConstraints>
++		</resourceConstraints>		
++
+ 		<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->		
+ 		
+ 		<srv:serviceType>
+@@ -507,7 +543,42 @@
+ 			</descriptiveKeywords>
+ 		</xsl:for-each>
+ 		
+-		
++		<!-- access constraints -->
++		<resourceConstraints>
++			<MD_LegalConstraints>
++				<xsl:choose>
++					<xsl:when test="name(.)='WFS_Capabilities' or $ows='true'">						
++						<xsl:for-each select="ows:ServiceIdentification/ows:AccessConstraints">
++							<accessConstraints>						
++									<gco:CharacterString>
++										<xsl:value-of select="." />
++									</gco:CharacterString>						
++							</accessConstraints>
++						</xsl:for-each>	
++					</xsl:when>
++					<xsl:when test="name(.)='WMT_MS_Capabilities'">						
++						<xsl:for-each select="Service/AccessConstraints">
++							<accessConstraints>							
++									<gco:CharacterString>
++										<xsl:value-of select="." />
++									</gco:CharacterString>						
++							</accessConstraints>
++						</xsl:for-each>
++					</xsl:when>
++					<xsl:otherwise>						
++						<!-- Accessconstraints -->
++						<xsl:for-each select="wcs:Service/wcs:Accessconstraints">
++							<accessConstraints>								
++									<gco:CharacterString>										
++										<xsl:value-of select="." />
++									</gco:CharacterString>							
++							</accessConstraints>
++						</xsl:for-each>
++					</xsl:otherwise>
++				</xsl:choose>
++			</MD_LegalConstraints>
++		</resourceConstraints>		
++
+ 		<xsl:choose>
+ 		 	<xsl:when test="//wfs:FeatureType">
+ 				<spatialRepresentationType>
+Index: web/src/main/webapp/xsl/conversion/OGCWxSGetCapabilitiesto19119/OGCWxSGetCapabilitiesLayer-to-19139.xsl
+===================================================================
+--- web/src/main/webapp/xsl/conversion/OGCWxSGetCapabilitiesto19119/OGCWxSGetCapabilitiesLayer-to-19139.xsl	(revision 6113)
++++ web/src/main/webapp/xsl/conversion/OGCWxSGetCapabilitiesto19119/OGCWxSGetCapabilitiesLayer-to-19139.xsl	(working copy)
+@@ -55,7 +55,7 @@
+ 
+ 		<xsl:variable name="ows">
+ 			<xsl:choose>
+-				<xsl:when test="local-name(.)='WFS_Capabilities' and namespace-uri(.)='http://www.opengis.net/wfs' and @version='1.1.0'">true</xsl:when>
++				<xsl:when test="local-name(.)='WFS_Capabilities' and namespace-uri(.)='http://www.opengis.net/wfs' and @version='1.1.0' or local-name(.)='Capabilities' and namespace-uri(.)='http://www.opengeospatial.net/wps'">true</xsl:when>
+ 				<xsl:otherwise>false</xsl:otherwise>
+ 			</xsl:choose>
+ 		</xsl:variable>

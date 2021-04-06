@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<registryObjects>
+
+	<registryObject group="BOM">
+		<key>Observations</key>
+		<originatingSource>urn:bom:gov:au:program:observations</originatingSource>
+		<activity type="program">
+			<name type="primary">
+				<namePart type="text">Observations</namePart>
+			</name>
+			<location>
+				<address>
+					<electronic type="url">
+						<value>urn:bom:gov:au:program:observations</value>
+					</electronic>
+				</address>
+			</location>
+			<relatedObject>
+				<key>http://www.bom.gov.au/Manager, Geospatial Data Unit</key>
+				<relation type="pointOfContact" />
+			</relatedObject>					
+			<!--0401 ATMOSPHERIC SCIENCES -->
+			<subject type="anzsrc-for">0401</subject>
+			<!-- 040105 Climatology (excl. Climate Change Processes) -->
+			<subject type="anzsrc-for">040105</subject>
+			<!-- 040107 Meteorology -->
+			<subject type="anzsrc-for">040107</subject>
+			<!-- 0405 Oceanography -->
+			<subject type="anzsrc-for">0405</subject>
+			<!-- 040608 Surfacewater Hydrology -->
+			<subject type="anzsrc-for">040608</subject>
+			<subject type="anzlic-theme" xml:lang="en">ATMOSPHERE</subject>
+			<subject type="anzlic-theme" xml:lang="en">ATMOSPHERE-Pressure</subject>
+			<subject type="anzlic-theme" xml:lang="en">CLIMATE-AND-WEATHER</subject>
+			<subject type="anzlic-theme" xml:lang="en">CLIMATE-AND-WEATHER-Meteorology</subject>
+			<subject type="anzlic-theme" xml:lang="en">CLIMATE-AND-WEATHER-Radiation</subject>
+			<subject type="anzlic-theme" xml:lang="en">CLIMATE-AND-WEATHER-Rainfall</subject>
+			<subject type="anzlic-theme" xml:lang="en">CLIMATE-AND-WEATHER-Temperature</subject>
+			<subject type="anzlic-theme" xml:lang="en">MARINE-Meteorology</subject>
+			<subject type="anzlic-theme" xml:lang="en">OCEANOGRAPHY</subject>
+			<subject type="anzlic-theme" xml:lang="en">WATER-Hydrology</subject>	
+			<description type="brief">
+				The Observations Program supports the nation’s climate record, weather services, research and international obligations.
+
+				The Observations Program is delivered through 4 functions:
+
+				    * Taking and recording of meteorological observations.
+				    * Taking and recording of hydrological observations.
+				    * Taking and recording of ocean and sea-level observations.
+				    * Taking and recording of space weather observations.
+			</description>
+		</activity>
+	</registryObject>
+
+	<registryObject group="BOM">
+		<key>Warnings and Weather Forecasts</key>
+		<originatingSource>urn:bom:gov:au:program:warnings_and_weather_forecasts</originatingSource>
+		<activity type="program">
+			<name type="primary">
+				<namePart type="text">Warnings and Weather Forecasts</namePart>
+			</name>
+			<location>
+				<address>
+					<electronic type="url">
+						<value>urn:bom:gov:au:program:warnings_and_weather_forecasts</value>
+					</electronic>
+				</address>
+			</location>
+			<relatedObject>
+				<key>http://www.bom.gov.au/Manager, Geospatial Data Unit</key>
+				<relation type="pointOfContact" />
+			</relatedObject>					
+			<!--0401 ATMOSPHERIC SCIENCES -->
+			<subject type="anzsrc-for">0401</subject>
+			<!-- 040105 Climatology (excl. Climate Change Processes) -->
+			<subject type="anzsrc-for">040105</subject>
+			<!-- 040107 Meteorology -->
+			<subject type="anzsrc-for">040107</subject>
+			<!-- 040604 Natural Hazards -->
+			<subject type="anzsrc-for">040604</subject>
+			<!-- 0405 Oceanography -->
+			<subject type="anzsrc-for">0405</subject>
+			<!-- 040608 Surfacewater Hydrology -->
+			<subject type="anzsrc-for">040608</subject>
+			<subject type="anzlic-theme" xml:lang="en">ATMOSPHERE</subject>
+			<subject type="anzlic-theme" xml:lang="en">ATMOSPHERE-Pressure</subject>
+			<subject type="anzlic-theme" xml:lang="en">BOUNDARIES</subject>
+			<subject type="anzlic-theme" xml:lang="en">CLIMATE-AND-WEATHER</subject>
+			<subject type="anzlic-theme" xml:lang="en">CLIMATE-AND-WEATHER-Extreme-weather-events</subject>
+			<subject type="anzlic-theme" xml:lang="en">CLIMATE-AND-WEATHER-Meteorology</subject>
+			<subject type="anzlic-theme" xml:lang="en">CLIMATE-AND-WEATHER-Radiation</subject>
+			<subject type="anzlic-theme" xml:lang="en">CLIMATE-AND-WEATHER-Rainfall</subject>
+			<subject type="anzlic-theme" xml:lang="en">CLIMATE-AND-WEATHER-Temperature</subject>
+			<subject type="anzlic-theme" xml:lang="en">HAZARDS</subject>
+			<subject type="anzlic-theme" xml:lang="en">HAZARDS-Cyclones</subject>
+			<subject type="anzlic-theme" xml:lang="en">HAZARDS-Fire</subject>
+			<subject type="anzlic-theme" xml:lang="en">HAZARDS-Severe-local-storms</subject>
+			<subject type="anzlic-theme" xml:lang="en">HAZARDS-Tsunamis</subject>
+			<subject type="anzlic-theme" xml:lang="en">MARINE-Meteorology</subject>
+			<subject type="anzlic-theme" xml:lang="en">OCEANOGRAPHY</subject>
+			<subject type="anzlic-theme" xml:lang="en">WATER-Hydrology</subject>	
+			<description type="brief">
+				The Warning and Weather Forecasts Program provides the Australian community and specific sectors including emergency services, aviation, the Australian Defence Force, mariners, primary production, industry, trade and commerce with relevant, accurate and timely weather and ocean forecasts, and critical warning services for severe weather, tropical cyclones, fire weather, volcanic ash, tsunami and space weather disturbances for the safety of life and property and the economic benefit of all Australians.
+
+				The Warnings and Weather Forecasts Program is delivered through eight functions:
+
+				    * Forecasting weather and warning of weather conditions likely to endanger life or property.
+				    * Tsunami warnings.
+				    * Space weather warnings and advice.
+				    * Promotion and advancement of meteorological science through research.
+				    * Promoting the understanding and use of meteorological information.
+				    * Providing forecasts and related products to the aviation sector.
+				    * Providing forecasts and briefings to the Australian Defence Force.
+				    * Providing forecasts and information on the state of the oceans.
+			</description>
+		</activity>
+	</registryObject>
+
+	<registryObject group="BOM">
+		<key>Climate Information</key>
+		<originatingSource>urn:bom:gov:au:program:climate_information</originatingSource>
+		<activity type="program">
+			<name type="primary">
+				<namePart type="text">Climate Information</namePart>
+			</name>
+			<location>
+				<address>
+					<electronic type="url">
+						<value>urn:bom:gov:au:program:climate_information</value>
+					</electronic>
+				</address>
+			</location>
+			<relatedObject>
+				<key>http://www.bom.gov.au/Manager, Geospatial Data Unit</key>
+				<relation type="pointOfContact" />
+			</relatedObject>						
+			<!--0401 ATMOSPHERIC SCIENCES -->
+			<subject type="anzsrc-for">0401</subject>
+			<!-- 040104 Climate Change Processes -->
+			<subject type="anzsrc-for">040104</subject>
+			<!-- 040105 Climatology (excl. Climate Change Processes) -->
+			<subject type="anzsrc-for">040105</subject>
+			<!-- 040107 Meteorology -->
+			<subject type="anzsrc-for">040107</subject>
+			<!-- 040608 Surfacewater Hydrology -->
+			<subject type="anzsrc-for">040608</subject>
+			<subject type="anzlic-theme" xml:lang="en">ATMOSPHERE</subject>
+			<subject type="anzlic-theme" xml:lang="en">ATMOSPHERE-Pressure</subject>
+			<subject type="anzlic-theme" xml:lang="en">CLIMATE-AND-WEATHER-Climate-change</subject>
+			<subject type="anzlic-theme" xml:lang="en">CLIMATE-AND-WEATHER-El-Nino</subject>
+			<subject type="anzlic-theme" xml:lang="en">CLIMATE-AND-WEATHER-Meteorology</subject>
+			<subject type="anzlic-theme" xml:lang="en">CLIMATE-AND-WEATHER-Radiation</subject>
+			<subject type="anzlic-theme" xml:lang="en">CLIMATE-AND-WEATHER-Rainfall</subject>
+			<subject type="anzlic-theme" xml:lang="en">CLIMATE-AND-WEATHER-Temperature</subject>
+			<subject type="anzlic-theme" xml:lang="en">MARINE-Meteorology</subject>
+			<subject type="anzlic-theme" xml:lang="en">WATER-Hydrology</subject>
+			<description type="brief">
+				The Climate Information Program maintains the national climate record and provides high-quality readily available climate data, information and advice, to assist decision-making, with particular emphasis on the emergence of climate conditions leading to social and economic stress.
+
+				The Climate Information Program is delivered through seven functions:
+
+				    * Maintaining and publishing the climate record.
+				    * Monitoring of climate variability and change.
+				    * Providing seasonal climate prediction.
+				    * Providing ocean climate information.
+				    * Conducting climate research.
+				    * Furnishing advice on climate matters.
+				    * Developing and maintaining climate information systems.
+			</description>
+		</activity>
+	</registryObject>
+
+	<registryObject group="BOM">
+		<key>Water Information</key>
+		<originatingSource>urn:bom:gov:au:program:water_information</originatingSource>
+		<activity type="program">
+			<name type="primary">
+				<namePart type="text">Water Information</namePart>
+			</name>
+			<location>
+				<address>
+					<electronic type="url">
+						<value>urn:bom:gov:au:program:water_information</value>
+					</electronic>
+				</address>
+			</location>
+			<relatedObject>
+				<key>http://www.bom.gov.au/Manager, Geospatial Data Unit</key>
+				<relation type="pointOfContact" />
+			</relatedObject>						
+			<!-- 040604 Natural Hazards -->
+			<subject type="anzsrc-for">040604</subject>
+			<!-- 040608 Surfacewater Hydrology -->
+			<subject type="anzsrc-for">040608</subject>
+			<subject type="anzlic-theme" xml:lang="en">HAZARDS-Flood</subject>
+			<subject type="anzlic-theme" xml:lang="en">WATER-Groundwater</subject>
+			<subject type="anzlic-theme" xml:lang="en">WATER-Hydrology</subject>
+			<subject type="anzlic-theme" xml:lang="en">WATER-Lakes</subject>
+			<subject type="anzlic-theme" xml:lang="en">WATER-Rivers</subject>
+			<subject type="anzlic-theme" xml:lang="en">WATER-Supply</subject>
+			<subject type="anzlic-theme" xml:lang="en">WATER-Surface</subject>
+			<description type="brief">
+				The Water Information Program provides governments, industry and the community with relevant, accurate and timely information on he status of Australia’s water resources. Provides effective and reliable short-term and medium-term water (including flood) forecasting services for the nation. Compiles, maintains and annually publishes the National Water Account, enabling better informed decision-making.
+
+				The Water Information Program is delivered through eight functions:
+
+				    * Issuing National Water Information Standards.
+				    * Collecting and publishing water information.
+				    * Conducting regular national water resources assessments.
+				    * Publishing an annual National Water Account.
+				    * Providing a national flood warning and forecasting service.
+				    * Providing water availability forecasts.
+				    * Development of water information systems.
+				    * Water information research.
+			</description>
+		</activity>
+	</registryObject>
+
+	<registryObject group="BOM">
+		<key>Environmental Information</key>
+		<originatingSource>urn:bom:gov:au:program:environmental_information</originatingSource>
+		<activity type="program">
+			<name type="primary">
+				<namePart type="text">Environmental Information</namePart>
+			</name>
+			<location>
+				<address>
+					<electronic type="url">
+						<value>urn:bom:gov:au:program:environmental_information</value>
+					</electronic>
+				</address>
+			</location>
+			<relatedObject>
+				<key>http://www.bom.gov.au/Manager, Geospatial Data Unit</key>
+				<relation type="pointOfContact" />
+			</relatedObject>		
+			<!--0401 ATMOSPHERIC SCIENCES -->
+			<subject type="anzsrc-for">0401</subject>
+			<!--0406 PHYSICAL GEOGRAPHY AND ENVIRONMENTAL GEOSCIENCE -->
+			<subject type="anzsrc-for">0406</subject>
+			<subject type="anzlic-theme" xml:lang="en">ATMOSPHERE</subject>
+			<subject type="anzlic-theme" xml:lang="en">ECOLOGY</subject>
+			<subject type="anzlic-theme" xml:lang="en">FAUNA</subject>
+			<subject type="anzlic-theme" xml:lang="en">FLORA</subject>
+			<subject type="anzlic-theme" xml:lang="en">FORESTS</subject>
+			<subject type="anzlic-theme" xml:lang="en">LAND</subject>
+			<subject type="anzlic-theme" xml:lang="en">MARINE</subject>
+			<subject type="anzlic-theme" xml:lang="en">POLLUTION</subject>
+			<subject type="anzlic-theme" xml:lang="en">SOIL</subject>
+			<subject type="anzlic-theme" xml:lang="en">VEGETATION</subject>
+			<subject type="anzlic-theme" xml:lang="en">WATER</subject>	
+			<description type="brief">
+				The Environmental Information Program is towards building an authoritative source of environmental information for decision makers in government, industry and the community.
+
+				The Environmental Information Program is delivered through three functions:
+
+				    * Issuing national environmental information standards.
+				    * Developing and maintaining environmental information systems.
+				    * Collecting and publishing environmental information.
+			</description>
+		</activity>
+	</registryObject>
+
+</registryObjects>

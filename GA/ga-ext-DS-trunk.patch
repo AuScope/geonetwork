@@ -1,0 +1,311 @@
+Index: jeeves/src/main/java/jeeves/constants/Jeeves.java
+===================================================================
+--- jeeves/src/main/java/jeeves/constants/Jeeves.java	(revision 7819)
++++ jeeves/src/main/java/jeeves/constants/Jeeves.java	(working copy)
+@@ -37,7 +37,12 @@
+    public static final int MAX_UPLOAD_SIZE = 50; // 50 MB
+ 
+ 	public static final String CONFIG_FILE = "config.xml";
+-
++	
++	/**
++	 * JNDI Environment name.
++	 */
++	public static final String JNDI_ENV = "java:comp/env";
++		
+ 	//--------------------------------------------------------------------------
+ 	//---
+ 	//--- Url prefixes
+@@ -248,6 +253,23 @@
+ 			public static final int DEF_MAX_TRIES      = 20;  // number of connection attempts
+ 			public static final int DEF_MAX_WAIT       = 200; // msecs between attempts
+ 		}
++				
++		public class DataSource {
++			
++			/**
++			 * Name for DataSource in JNDI environment. (mandatory)<br>
++			 * For example, &lt;jndiName>jdbc/GeonetDS&lt;/jndiName>.  
++			 */
++			public static final String JNDI_NAME		= "jndiName";
++			
++			/**
++			 * Database vendor name (mandatory). Not required to establish
++			 * a connection but is used by GAST to select different DDL
++			 * flavours during database creation.<br> 
++			 * For example, &lt;vendor>oracle&lt;/vendor>.  
++			 */
++			public static final String VENDOR			= "vendor";
++		}
+ 	}
+ 
+ 	//--------------------------------------------------------------------------
+Index: jeeves/src/main/java/jeeves/resources/dbms/AbstractProvider.java
+===================================================================
+--- jeeves/src/main/java/jeeves/resources/dbms/AbstractProvider.java	(revision 0)
++++ jeeves/src/main/java/jeeves/resources/dbms/AbstractProvider.java	(revision 0)
+@@ -0,0 +1,70 @@
++package jeeves.resources.dbms;
++
++import java.util.HashSet;
++import java.util.Set;
++
++import jeeves.server.resources.ResourceListener;
++import jeeves.server.resources.ResourceProvider;
++
++/**
++ * Provides abstract behaviour applicable to all ResourceProviders.
++ * 
++ * @author Stephen Davies
++ */
++public abstract class AbstractProvider implements ResourceProvider {
++
++	/**
++	 * Resource name from &lt;name&gt; element.
++	 */
++	private String name;
++
++	/**
++	 * ResourceListeners require event notification when abort(Object) or 
++	 * close(Object) are invoked.
++	 */
++	private Set<ResourceListener> listeners;
++	
++	protected AbstractProvider() {
++		listeners = new HashSet<ResourceListener>();
++	}
++
++	/**
++	 * Notify listeners that a resource has been aborted. 
++	 */
++	protected void fireAbort(Object resource) {
++		for (ResourceListener l : listeners) {
++			l.abort(resource);
++		}
++	}
++
++	/**
++	 * Adds a listener that is notified every time a resource is closed or aborted.
++	 */
++	public void addListener(ResourceListener l) {
++		listeners.add(l);
++	}
++
++	/**
++	 * Notify listeners that a resource has been closed. 
++	 */
++	protected void fireClose(Object resource) {
++		for (ResourceListener l : listeners) {
++			l.close(resource);
++		}
++	}
++
++	public String getName() { 
++		return name; 
++	}
++
++	/** 
++	 * Removes a listener that is notified every time a resource is closed or aborted.
++	 */
++	public void removeListener(ResourceListener l) {
++		listeners.remove(l);
++	}
++
++	protected void setName(String name) {
++		this.name = name;
++	}
++}
+Index: jeeves/src/main/java/jeeves/resources/dbms/DataSourceProvider.java
+===================================================================
+--- jeeves/src/main/java/jeeves/resources/dbms/DataSourceProvider.java	(revision 0)
++++ jeeves/src/main/java/jeeves/resources/dbms/DataSourceProvider.java	(revision 0)
+@@ -0,0 +1,111 @@
++package jeeves.resources.dbms;
++
++import java.sql.Connection;
++import java.sql.SQLException;
++import java.util.HashMap;
++import java.util.Map;
++
++import javax.naming.Context;
++import javax.naming.InitialContext;
++import javax.naming.NamingException;
++import javax.sql.DataSource;
++
++import jeeves.constants.Jeeves;
++
++import org.jdom.Element;
++
++/**
++ * <p>A DataSourceProvider allows a JNDI registered DataSource to be used in place of
++ * Jeeves database connection pooling. Database configuration is moved from config.xml 
++ * to the the container specific mechanism. For Tomcat this is the applications
++ * &lt;Context&gt; element.</p>
++ * 
++ * <p>Configuration fragment for config.xml:
++ * <pre>
++ * &lt;resource enabled="true"&gt;
++ *   &lt;name&gt;main-db&lt;/name&gt;
++ *   &lt;provider&gt;jeeves.resources.dbms.DataSourceProvider&lt;/provider&gt;
++ *   &lt;config&gt;
++ *     &lt;jndiName&gt;jdbc/GeonetDS&lt;/jndiName&gt;
++ *     &lt;vendor&gt;mckoi&lt;/vendor&gt;
++ *   &lt;/config&gt;
++ * &lt;/resource&gt;
++ * </pre>
++ * </p>
++ * 
++ * @author Stephen Davies
++ */
++public class DataSourceProvider extends AbstractProvider {
++
++	/**
++	 * JNDI name of Datasource.
++	 */
++	private String jndiName;
++	
++	/**
++	 * Database vendor name. 
++	 */
++	private String dbVendor;
++	
++	/**
++	 * Cached DataSource.
++	 */
++	private DataSource ds;
++	
++	public void abort(Object resource) throws Exception {
++		Dbms dbms = (Dbms)resource;
++		dbms.getConnection().rollback();
++		dbms.getConnection().close();
++	}
++
++	public void close(Object resource) throws Exception {
++		Dbms dbms = (Dbms)resource;
++		dbms.getConnection().commit();
++		dbms.getConnection().close();
++	}
++
++	public void end() {
++	}
++
++	/**
++	 * Initialise the provider.
++	 *
++	 * @throws NamingException 
++	 */
++	public void init(String name, Element config) throws NamingException {
++		setName(name);
++		
++		// handle mandatory elements
++		jndiName = config.getChildTextTrim(Jeeves.Res.DataSource.JNDI_NAME);
++		if (jndiName == null || jndiName.length() == 0) {
++			throw new IllegalArgumentException("Cannot configure a DataSourceProvider when no jndiName is supplied");
++		}
++		dbVendor = config.getChildTextTrim(Jeeves.Res.DataSource.VENDOR);
++		if (dbVendor == null || dbVendor.length() == 0) {
++			throw new IllegalArgumentException("Cannot configure a DataSourceProvider when no vendor is supplied");
++		}
++		
++		Context initialCtx = new InitialContext();
++		Context ctx = (Context) initialCtx.lookup(Jeeves.JNDI_ENV);
++		
++		ds = (DataSource) ctx.lookup(jndiName);
++	}
++
++	public Object open() throws Exception {
++		Connection conn = ds.getConnection();
++		conn.setAutoCommit(false);
++		return new Dbms(dbVendor, conn);
++	}
++	
++	public Map<String,String> getProps(){
++		Map<String,String> result = new HashMap<String,String>();
++		result.put("jndiName",		 jndiName);
++		result.put("dbVendor",		 dbVendor);
++		return result;
++	}
++
++	public Map<String, String> getStats() throws SQLException {		
++		return null;
++	}
++
++}
+Index: jeeves/src/main/java/jeeves/resources/dbms/Dbms.java
+===================================================================
+--- jeeves/src/main/java/jeeves/resources/dbms/Dbms.java	(revision 7819)
++++ jeeves/src/main/java/jeeves/resources/dbms/Dbms.java	(working copy)
+@@ -94,6 +94,15 @@
+ 		this.driverUrl = driverUrl;
+ 	}
+ 	
++	/**
++	 * Allow connection to be created externally.
++	 */
++	public Dbms(String vendor, Connection conn) {
++		this.url = vendor;
++		this.driverUrl=vendor;
++		this.conn = conn;
++	}
++	
+ 	//--------------------------------------------------------------------------
+ 	//---
+ 	//--- Connection methods
+Index: web/src/main/java/org/fao/geonet/Geonetwork.java
+===================================================================
+--- web/src/main/java/org/fao/geonet/Geonetwork.java	(revision 7819)
++++ web/src/main/java/org/fao/geonet/Geonetwork.java	(working copy)
+@@ -660,16 +660,20 @@
+ 		String passwd = props.get("password");
+ 
+ 		DataStore ds = null;
+-		try {
+-			if (url.contains("postgis")) {
+-				ds = createPostgisDatastore(user, passwd, url);
+-			} else if (url.contains("oracle")) {
+-				ds = createOracleDatastore(user, passwd, url);
++		
++		//external DS doesn't have url property but dbVendor
++		if (url!=null){
++			try {
++				if (url.contains("postgis")) {
++					ds = createPostgisDatastore(user, passwd, url);
++				} else if (url.contains("oracle")) {
++					ds = createOracleDatastore(user, passwd, url);
++				}
++			} catch (Exception e) {
++				logger.error("Failed to create datastore for "+url+". Will use shapefile instead.");
++				logger.error(e.getMessage());
++				e.printStackTrace();
+ 			}
+-		} catch (Exception e) {
+-			logger.error("Failed to create datastore for "+url+". Will use shapefile instead.");
+-			logger.error(e.getMessage());
+-			e.printStackTrace();
+ 		}
+ 
+ 		if (ds != null) return ds;
+Index: web/src/main/webapp/WEB-INF/config.xml
+===================================================================
+--- web/src/main/webapp/WEB-INF/config.xml	(revision 7819)
++++ web/src/main/webapp/WEB-INF/config.xml	(working copy)
+@@ -227,6 +227,19 @@
+ 				<poolSize>10</poolSize>
+ 			</config>
+ 		</resource>
++		
++		<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
++		<!-- Use JNDI Datasource -->
++		<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
++
++		<resource enabled="false" mode="server">
++			<name>main-db</name>
++			<provider>jeeves.resources.dbms.DataSourceProvider</provider>
++			<config>
++				<jndiName>jdbc/GeonetDS</jndiName>
++				<vendor>oracle</vendor>
++			</config>
++		</resource>		
+ 	    
+ 	</resources>
+ 

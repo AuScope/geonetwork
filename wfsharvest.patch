@@ -1,0 +1,44 @@
+Index: web/src/main/webapp/WEB-INF/data/config/schema_plugins/iso19139/convert/OGCWxSGetCapabilitiesto19119/identification.xsl
+===================================================================
+--- web/src/main/webapp/WEB-INF/data/config/schema_plugins/iso19139/convert/OGCWxSGetCapabilitiesto19119/identification.xsl	(revision 6665)
++++ web/src/main/webapp/WEB-INF/data/config/schema_plugins/iso19139/convert/OGCWxSGetCapabilitiesto19119/identification.xsl	(working copy)
+@@ -335,7 +335,7 @@
+ 									</xsl:variable>
+ 											
+ 									<westBoundLongitude>
+-										<gco:Decimal><xsl:copy-of select="math:min(exslt:node-set($boxes)/*[name(.)='xmin'])"/></gco:Decimal>
++										<gco:Decimal><xsl:value-of select="math:min(exslt:node-set($boxes)/*[name(.)='xmin'])"/></gco:Decimal>
+ 									</westBoundLongitude>
+ 									<eastBoundLongitude>
+ 										<gco:Decimal><xsl:value-of select="math:max(exslt:node-set($boxes)/*[name(.)='xmax'])"/></gco:Decimal>
+@@ -745,7 +745,7 @@
+ 									</xsl:variable>
+ 											
+ 									<westBoundLongitude>
+-										<gco:Decimal><xsl:copy-of select="exslt:node-set($boxes)/*[name(.)='xmin']"/></gco:Decimal>
++										<gco:Decimal><xsl:value-of select="exslt:node-set($boxes)/*[name(.)='xmin']"/></gco:Decimal>
+ 									</westBoundLongitude>
+ 									<eastBoundLongitude>
+ 										<gco:Decimal><xsl:value-of select="exslt:node-set($boxes)/*[name(.)='xmax']"/></gco:Decimal>
+Index: web/src/main/webapp/xsl/conversion/OGCWxSGetCapabilitiesto19119/identification.xsl
+===================================================================
+--- web/src/main/webapp/xsl/conversion/OGCWxSGetCapabilitiesto19119/identification.xsl	(revision 6665)
++++ web/src/main/webapp/xsl/conversion/OGCWxSGetCapabilitiesto19119/identification.xsl	(working copy)
+@@ -216,7 +216,7 @@
+ 									</xsl:variable>
+ 											
+ 									<westBoundLongitude>
+-										<gco:Decimal><xsl:copy-of select="math:min(exslt:node-set($boxes)/*[name(.)='xmin'])"/></gco:Decimal>
++										<gco:Decimal><xsl:value-of select="math:min(exslt:node-set($boxes)/*[name(.)='xmin'])"/></gco:Decimal>
+ 									</westBoundLongitude>
+ 									<eastBoundLongitude>
+ 										<gco:Decimal><xsl:value-of select="math:max(exslt:node-set($boxes)/*[name(.)='xmax'])"/></gco:Decimal>
+@@ -600,7 +600,7 @@
+ 									</xsl:variable>
+ 											
+ 									<westBoundLongitude>
+-										<gco:Decimal><xsl:copy-of select="exslt:node-set($boxes)/*[name(.)='xmin']"/></gco:Decimal>
++										<gco:Decimal><xsl:value-of select="exslt:node-set($boxes)/*[name(.)='xmin']"/></gco:Decimal>
+ 									</westBoundLongitude>
+ 									<eastBoundLongitude>
+ 										<gco:Decimal><xsl:value-of select="exslt:node-set($boxes)/*[name(.)='xmax']"/></gco:Decimal>

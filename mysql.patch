@@ -1,0 +1,187 @@
+Index: web/src/main/java/org/fao/geonet/kernel/DataManager.java
+===================================================================
+--- web/src/main/java/org/fao/geonet/kernel/DataManager.java	(revision 6665)
++++ web/src/main/java/org/fao/geonet/kernel/DataManager.java	(working copy)
+@@ -520,7 +520,7 @@
+ 
+             // get privileges
+             List operations = dbms
+-                    .select("SELECT groupId, operationId, g.name FROM OperationAllowed o, groups g WHERE g.id = o.groupId AND metadataId = ? ORDER BY operationId ASC", id$)
++                    .select("SELECT groupId, operationId, g.name FROM OperationAllowed o, Groups g WHERE g.id = o.groupId AND metadataId = ? ORDER BY operationId ASC", id$)
+                     .getChildren();
+ 
+             for (Object operation1 : operations) {
+@@ -2509,7 +2509,7 @@
+      * @return
+      */
+     public String pickAnyAdministrator(Dbms dbms) throws Exception{
+-        String query = "SELECT id FROM users WHERE profile=?";
++        String query = "SELECT id FROM Users WHERE profile=?";
+         Element elRes = dbms.select(query, Geonet.Profile.ADMINISTRATOR);
+         String id = null;
+         if(elRes != null) {
+@@ -2531,7 +2531,7 @@
+     }
+ 
+     public String getUserProfile(Dbms dbms, int userId) throws Exception {
+-        String query = "SELECT profile FROM users WHERE id=?";
++        String query = "SELECT profile FROM Users WHERE id=?";
+         Element elRes = dbms.select(query, userId);
+         if(elRes != null) {
+             Element elRec = elRes.getChild("record");
+@@ -2766,7 +2766,7 @@
+             Log.debug(Geonet.DATA_MANAGER, "getUnnotifiedMetadata start");
+         Map<String,Element> unregisteredMetadata = new HashMap<String,Element>();
+ 
+-        String query = "select m.id, m.uuid, m.data, mn.notifierId, mn.action from metadata m left join metadatanotifications mn on m.id = mn.metadataId\n" +
++        String query = "select m.id, m.uuid, m.data, mn.notifierId, mn.action from Metadata m left join MetadataNotifications mn on m.id = mn.metadataId\n" +
+                 "where (mn.notified is null or mn.notified = 'n') and (mn.action <> 'd') and (mn.notifierId is null or mn.notifierId = ?)";
+         List<Element> results = dbms.select(query, Integer.valueOf(notifierId)).getChildren();
+         if(Log.isDebugEnabled(Geonet.DATA_MANAGER))
+Index: web/src/main/java/org/fao/geonet/monitor/health/DatabaseHealthCheck.java
+===================================================================
+--- web/src/main/java/org/fao/geonet/monitor/health/DatabaseHealthCheck.java	(revision 6665)
++++ web/src/main/java/org/fao/geonet/monitor/health/DatabaseHealthCheck.java	(working copy)
+@@ -22,7 +22,7 @@
+                 try {
+                     // TODO add timeout
+                     dbms = (Dbms) context.getResourceManager().openDirect(Geonet.Res.MAIN_DB);
+-                    dbms.select("SELECT count(*) as count from settings");
++                    dbms.select("SELECT count(*) as count from Settings");
+                     return Result.healthy();
+                 } catch (Throwable e) {
+                     return Result.unhealthy(e);
+Index: web/src/main/java/org/fao/geonet/services/statistics/CatalogsPopularity.java
+===================================================================
+--- web/src/main/java/org/fao/geonet/services/statistics/CatalogsPopularity.java	(revision 6665)
++++ web/src/main/java/org/fao/geonet/services/statistics/CatalogsPopularity.java	(working copy)
+@@ -79,7 +79,7 @@
+ 		Dbms dbms = (Dbms) context.getResourceManager().open(Geonet.Res.MAIN_DB);
+ 		
+ 		// wont work if there is no metadata
+-		List l  = dbms.select("select sum(popularity) as sumpop from metadata").getChildren();
++		List l  = dbms.select("select sum(popularity) as sumpop from Metadata").getChildren();
+ 		if (l.size() != 1) {
+ 			message = "cannot get popularity count";
+ 			return null;
+Index: web/src/main/java/org/fao/geonet/services/statistics/CategoriesPopularity.java
+===================================================================
+--- web/src/main/java/org/fao/geonet/services/statistics/CategoriesPopularity.java	(revision 6665)
++++ web/src/main/java/org/fao/geonet/services/statistics/CategoriesPopularity.java	(working copy)
+@@ -80,7 +80,7 @@
+ 		Dbms dbms = (Dbms) context.getResourceManager().open(Geonet.Res.MAIN_DB);
+ 		
+ 		// wont work if there is no metadata
+-		List l  = dbms.select("select sum(popularity) as sumpop from metadata").getChildren();
++		List l  = dbms.select("select sum(popularity) as sumpop from Metadata").getChildren();
+ 		if (l.size() != 1) {
+ 			message = "cannot get popularity count";
+ 			return null;
+Index: web/src/main/java/org/fao/geonet/services/statistics/GroupsPopularity.java
+===================================================================
+--- web/src/main/java/org/fao/geonet/services/statistics/GroupsPopularity.java	(revision 6665)
++++ web/src/main/java/org/fao/geonet/services/statistics/GroupsPopularity.java	(working copy)
+@@ -76,7 +76,7 @@
+ 		Dbms dbms = (Dbms) context.getResourceManager().open(Geonet.Res.MAIN_DB);
+ 		
+ 		// wont work if there is no metadata
+-		List l  = dbms.select("select sum(popularity) as sumpop from metadata").getChildren();
++		List l  = dbms.select("select sum(popularity) as sumpop from Metadata").getChildren();
+ 		if (l.size() != 1) {
+ 			message = "cannot get popularity count";
+ 			return null;
+Index: web/src/main/java/org/fao/geonet/services/statistics/LastMonthSummary.java
+===================================================================
+--- web/src/main/java/org/fao/geonet/services/statistics/LastMonthSummary.java	(revision 6665)
++++ web/src/main/java/org/fao/geonet/services/statistics/LastMonthSummary.java	(working copy)
+@@ -56,9 +56,9 @@
+ 		//also contains total number of hits
+ 		//String query = "select count(*) as totalcount, nohit from requests a, (select count(*) as nohit from requests where hits=0) as b where requestdate >'";
+         String  query = "select a.totalcnt as totalcount, b.noreq as nohit from (select count(*) as ";
+-        query += "totalcnt from requests where requestdate > ?";
++        query += "totalcnt from Requests where requestdate > ?";
+ 				query += " and autogenerated = 0";
+-        query += ") as a, (select count(*) as noreq from requests where hits=0 and requestdate > ?";
++        query += ") as a, (select count(*) as noreq from Requests where hits=0 and requestdate > ?";
+ 				query += " and autogenerated = 0";
+ 				query += ") as b";
+ 
+@@ -74,7 +74,7 @@
+ 		Element meanSearchElement = new Element("meanSearchLastMonth").setText("" + Math.round((double)totalCount/(double)numberOfDay));
+ 		
+ 		// autogenerated searches (guiservices)
+-		query = "select count(*) as cnt from requests ";
++		query = "select count(*) as cnt from Requests ";
+ 		query += " where requestdate > ?";
+ 		query += " and autogenerated = 1";
+         if(Log.isDebugEnabled(Geonet.SEARCH_LOGGER))
+@@ -85,7 +85,7 @@
+ 		Element autogeneratedElement = new Element("autogenerated").setText(autogeneratedCount+"");
+ 
+ 		// simple/advanced searches
+-		query = "select simple, count(*) as cnt from requests ";
++		query = "select simple, count(*) as cnt from Requests ";
+ 		query += " where requestdate > ?";
+ 		query += " and autogenerated = 0";
+ 		query += " group by simple order by simple";
+@@ -118,7 +118,7 @@
+ 
+ 		// search by MD type (service MD, data MD, geodata, all)
+ 		Element mdTypeElement = new Element("mdType");
+-		query = "select count(type) as typecount, type from requests where requestdate > ?";
++		query = "select count(type) as typecount, type from Requests where requestdate > ?";
+ 		query += " and autogenerated = 0 group by type order by typecount DESC";
+ 		mdTypeElement.setContent(dbms.select(query, monthAgo));
+         if(Log.isDebugEnabled(Geonet.SEARCH_LOGGER))
+Index: web/src/main/java/org/fao/geonet/services/statistics/MostSearchedCategory.java
+===================================================================
+--- web/src/main/java/org/fao/geonet/services/statistics/MostSearchedCategory.java	(revision 6665)
++++ web/src/main/java/org/fao/geonet/services/statistics/MostSearchedCategory.java	(working copy)
+@@ -41,7 +41,7 @@
+         Dbms dbms = (Dbms) context.getResourceManager().open(Geonet.Res.MAIN_DB);
+ 
+         String query = "select termtext, count(*) as cnt from ";
+-        query += "params ";
++        query += "Params ";
+ 		if (luceneTermFields != null && luceneTermFields.length() > 0) {
+ 			query += " where length(termtext) > 0 and termField in (" + luceneTermFields + ")";
+ 		}
+Index: web/src/main/java/org/fao/geonet/services/statistics/MostSearchedKeyword.java
+===================================================================
+--- web/src/main/java/org/fao/geonet/services/statistics/MostSearchedKeyword.java	(revision 6665)
++++ web/src/main/java/org/fao/geonet/services/statistics/MostSearchedKeyword.java	(working copy)
+@@ -39,7 +39,7 @@
+         Dbms dbms = (Dbms) context.getResourceManager().open(Geonet.Res.MAIN_DB);
+ 
+         String query = "select termtext, count(*) as cnt from ";
+-        query += "params ";
++        query += "Params ";
+ 		if (luceneTermFieldsToExclude != null && luceneTermFieldsToExclude.length() > 0) {
+ 			query += " where length(termtext) > 0 and termField not in (" + luceneTermFieldsToExclude + ")";
+ 		}
+Index: web/src/main/java/org/fao/geonet/services/subtemplate/Get.java
+===================================================================
+--- web/src/main/java/org/fao/geonet/services/subtemplate/Get.java	(revision 6665)
++++ web/src/main/java/org/fao/geonet/services/subtemplate/Get.java	(working copy)
+@@ -77,7 +77,7 @@
+         
+         // Retrieve template
+         Dbms dbms = (Dbms) context.getResourceManager().open (Geonet.Res.MAIN_DB);
+-        Element rec = dbms.select("SELECT data FROM metadata WHERE isTemplate = 's' AND uuid = ?", uuid);
++        Element rec = dbms.select("SELECT data FROM Metadata WHERE isTemplate = 's' AND uuid = ?", uuid);
+ 
+         String xmlData = rec.getChild(Jeeves.Elem.RECORD).getChildText("data");
+         rec = Xml.loadString(xmlData, false);
+Index: web/src/main/java/org/fao/geonet/services/subtemplate/GetTypes.java
+===================================================================
+--- web/src/main/java/org/fao/geonet/services/subtemplate/GetTypes.java	(revision 6665)
++++ web/src/main/java/org/fao/geonet/services/subtemplate/GetTypes.java	(working copy)
+@@ -47,7 +47,7 @@
+                 .open(Geonet.Res.MAIN_DB);
+ 
+         Element subTemplateTypes = dbms
+-                .select("SELECT root AS type, schemaId FROM metadata WHERE isTemplate = 's' GROUP BY root, schemaId ORDER BY root");
++                .select("SELECT root AS type, schemaId FROM Metadata WHERE isTemplate = 's' GROUP BY root, schemaId ORDER BY root");
+ 
+         GeonetContext gc = (GeonetContext) context.getHandlerContext(Geonet.CONTEXT_NAME);
+         SchemaManager scm = gc.getSchemamanager();

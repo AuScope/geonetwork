@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<registryObjects>
+	<!-- manually created Activities -->
+	<registryObject group="AuScope">
+		<key>Geoscience Australia (GA) Geodesy and Global Navigation Systems
+			BAU Project</key>
+		<originatingSource>http://portal.auscope.org</originatingSource>
+		<identifier>http://services.auscope.org:80/geodesy/wfs</identifier>
+		<activity type="project">
+			<name type="primary">
+				<namePart type="text">Geoscience Australia (GA) Geodesy and Global
+					Navigation Systems BAU Project
+				</namePart>
+			</name>
+			<location>
+				<address>
+					<electronic type="url">
+						<value>http://www.ga.gov.au/earth-monitoring/geodesy.html</value>
+					</electronic>
+				</address>
+			</location>
+			<relatedObject>
+				<key>Ben Caradoc-Davies</key>
+				<relation type="pointOfContact" />
+			</relatedObject>
+			<subject type="local" xml:lang="en">geoscientificInformation
+			</subject>
+			<description type="brief">The maintenance project of the
+				Geoscience Australia's Geodesy and Global Navigation Systems.
+			</description>
+		</activity>
+	</registryObject>
+	<registryObject group="AuScope">
+		<key>Geoscience Victoria (GSV) EarthResource BAU Project</key>
+		<originatingSource>http://portal.auscope.org</originatingSource>
+		<identifier>http://gsv-ws.dpi.vic.gov.au/EarthResourceML/1.1/wfs</identifier>
+		<activity type="project">
+			<name type="primary">
+				<namePart type="text">Geoscience Victoria (GSV) EarthResource BAU
+					Project
+				</namePart>
+			</name>
+			<location>
+				<address>
+					<electronic type="url">
+						<value>http://new.dpi.vic.gov.au/earth-resources</value>
+					</electronic>
+				</address>
+			</location>
+			<relatedObject>
+				<key>Alistair Ritchie</key>
+				<relation type="pointOfContact" />
+			</relatedObject>
+			<subject type="local" xml:lang="en">geoscientificInformation</subject>
+			<subject type="local" xml:lang="en">geology</subject>
+			
+			<description type="brief">The maintenance project of the
+				provision of earth resources information for Victoria provided by
+				Geoscience Victoria.</description>
+		</activity>
+	</registryObject>
+	<registryObject group="AuScope">
+		<key>Geoscience Western Australia (GSWA) EarthResourceML BAU Project
+		</key>
+		<originatingSource>http://portal.auscope.org</originatingSource>
+		<identifier>http://services.auscope.org:80/gswa-earthresource/wfs</identifier>
+		<activity type="project">
+			<name type="primary">
+				<namePart type="text">Geoscience Western Australia (GSWA)
+					EarthResourceML BAU Project
+				</namePart>
+			</name>
+			<location>
+				<address>
+					<electronic type="url">
+						<value>http://www.dmp.wa.gov.au/371.aspx</value>
+					</electronic>
+				</address>
+			</location>
+			<relatedObject>
+				<key>Geological Survey of Western Australia (GSWA)</key>
+				<relation type="pointOfContact" />
+			</relatedObject>
+			<subject type="local" xml:lang="en">geoscientificInformation
+			</subject>
+			<subject type="local" xml:lang="en">geology</subject>
+			<description type="brief">The maintenance project of the
+				provision of earth resources information for Western Australia
+				provided by Geoscience Western Australia.</description>
+		</activity>
+	</registryObject>
+	<registryObject group="AuScope">
+		<key>Mineral Resources Tasmania (MRT) BAU Project</key>
+		<originatingSource>http://portal.auscope.org</originatingSource>
+		<identifier>http://www.mrt.tas.gov.au/web-services/wfs</identifier>
+		<activity type="project">
+			<name type="primary">
+				<namePart type="text">Mineral Resources Tasmania (MRT) BAU Project
+				</namePart>
+			</name>
+			<location>
+				<address>
+					<electronic type="url">
+						<value>http://www.mrt.tas.gov.au</value>
+					</electronic>
+				</address>
+			</location>
+			<relatedObject>
+				<key>Primary Industries and Resources SA (PIRSA)</key>
+				<relation type="pointOfContact" />
+			</relatedObject>
+			<subject type="local" xml:lang="en">geoscientificInformation
+			</subject>
+			<subject type="local" xml:lang="en">mineral</subject>
+			<description type="brief">The maintenance project of the
+				provision of earth resources of Tasmania provided by Mineral
+				Resources Tasmania.
+			</description>
+		</activity>
+	</registryObject>
+	<registryObject group="AuScope">
+		<key>AuScope National Virtual Core Library (NVCL) program</key>
+		<originatingSource>http://portal.auscope.org</originatingSource>
+		<identifier>http://nvclwebservices.vm.csiro.au:80/geoserverBH/wfs</identifier>
+		<activity type="program">
+			<name type="primary">
+				<namePart type="text">AuScope National Virtual Core Library (NVCL)
+					program</namePart>
+			</name>
+			<location>
+				<address>
+					<electronic type="url">
+						<value>http://nvcl.csiro.au</value>
+					</electronic>
+				</address>
+			</location>
+			<relatedObject>
+				<key>Peter Warren</key>
+				<relation type="pointOfContact" />
+			</relatedObject>
+			<subject type="local" xml:lang="en">geoscientificInformation
+			</subject>
+			<subject type="local" xml:lang="en">virtual core</subject>
+			<description type="brief">The NVCL, which is a program of the
+				Auscope National GeoTransects Program, has the goal of progressively
+				building a novel high-resolution image of earth materials and
+				properties for the upper one to two km of the Australian continent,
+				and facilitating world-class geoscience research. The NCVL will
+				contain both mineralogical and image content describing the geology
+				of a selection of the nation’s most valuable drill core assets. This
+				is information is currently captured using CSIRO’s suite of
+				HyLogging™ Systems technologies.</description>
+		</activity>
+	</registryObject>
+	<registryObject group="AuScope">
+		<key>Northern Territory Geological Survey (NTGS) EarthResource BAU
+			project</key>
+		<originatingSource>http://portal.auscope.org</originatingSource>
+		<identifier>http://services.auscope.org:80/ntgs-earthresource/wfs</identifier>
+		<activity type="project">
+			<name type="primary">
+				<namePart type="text">Northern Territory Geological Survey (NTGS)
+					EarthResource BAU project</namePart>
+			</name>
+			<location>
+				<address>
+					<electronic type="url">
+						<value>http://www.nt.gov.au/d/Minerals_Energy/Geoscience/</value>
+					</electronic>
+				</address>
+			</location>
+			<relatedObject>
+				<key>Northern Territory Geological Survey (NTGS)</key>
+				<relation type="pointOfContact" />
+			</relatedObject>
+			<subject type="local" xml:lang="en">geoscientificInformation
+			</subject>
+			<subject type="local" xml:lang="en">mineral</subject>
+			<subject type="local" xml:lang="en">earth resource</subject>
+			<description type="brief">The maintenance project of the
+				provision of earth resources information for South Australia
+				provided by Primary Industries and Resources SA.</description>
+		</activity>
+	</registryObject>
+	<registryObject group="AuScope">
+		<key>Primary Industries and Resources SA (PIRSA) EarthResource BAU
+			project</key>
+		<originatingSource>http://portal.auscope.org</originatingSource>
+		<identifier>http://services.auscope.org:80/pirsa-earthresource/wfs</identifier>
+		<activity type="project">
+			<name type="primary">
+				<namePart type="text">Primary Industries and Resources SA (PIRSA)
+					EarthResource BAU project</namePart>
+			</name>
+			<location>
+				<address>
+					<electronic type="url">
+						<value>http://www.pir.sa.gov.au/</value>
+					</electronic>
+				</address>
+			</location>
+			<relatedObject>
+				<key>Primary Industries and Resources SA (PIRSA)</key>
+				<relation type="pointOfContact" />
+			</relatedObject>
+			<subject type="local" xml:lang="en">geoscientificInformation
+			</subject>
+			<subject type="local" xml:lang="en">mineral</subject>
+			<description type="brief">The maintenance project of the
+				provision of earth resources information for South Australia
+				provided by Primary Industries and Resources SA.</description>
+		</activity>
+	</registryObject>
+	<registryObject group="AuScope">
+		<key>AuScope Earth Imaging Project</key>
+		<originatingSource>http://portal.auscope.org</originatingSource>
+		<identifier>http://services.auscope.org:80/earth-imaging/wms</identifier>
+		<activity type="project">
+			<name type="primary">
+				<namePart type="text">AuScope Earth Imaging Project</namePart>
+			</name>
+			<location>
+				<address>
+					<electronic type="url">
+						<value>http://www.auscope.org.au/content.php/category/id/16
+						</value>
+					</electronic>
+				</address>
+			</location>
+			<relatedObject>
+				<key>Terry Rankine</key>
+				<relation type="pointOfContact" />
+			</relatedObject>
+			<subject type="local" xml:lang="en">geoscientificInformation
+			</subject>
+			<subject type="local" xml:lang="en">earth imaging</subject>
+			<description type="brief">The Earth Imaging component of AuScope,
+				funded through the Australian Government NCRIS program, provides
+				support for the provision of portable equipment for seismic and
+				magnetotelluric studies through ANSIR.</description>
+		</activity>
+	</registryObject>
+	<registryObject group="AuScope">
+		<key>Geoscience Australia (GA) Geotransects BAU Project</key>
+		<originatingSource>http://portal.auscope.org</originatingSource>
+		<identifier>http://services.auscope.org:80/geotransects/wms</identifier>
+		<activity type="project">
+			<name type="primary">
+				<namePart type="text">Geoscience Australia (GA) Geotransects BAU
+					Project</namePart>
+			</name>
+			<location>
+				<address>
+					<electronic type="url">
+						<value>http://www.ga.gov.au/</value>
+					</electronic>
+				</address>
+			</location>
+			<relatedObject>
+				<key>Jenny Maher</key>
+				<relation type="pointOfContact" />
+			</relatedObject>
+			<subject type="local" xml:lang="en">geoscientificInformation
+			</subject>
+			<subject type="local" xml:lang="en">geotransect</subject>
+			<description type="brief">The maintenance project of Geoscience
+				Australia's Geotransects data.</description>
+		</activity>
+	</registryObject>
+	<registryObject group="AuScope">
+		<key>Geoscience Australia (GA) OneGeology BAU Project</key>
+		<originatingSource>http://portal.auscope.org</originatingSource>
+		<identifier>http://www.ga.gov.au/wms/getmap?dataset=geows</identifier>
+		<activity type="project">
+			<name type="primary">
+				<namePart type="text">Geoscience Australia (GA) OneGeology BAU Project</namePart>
+			</name>
+			<location>
+				<address>
+					<electronic type="url">
+						<value>http://www.ga.gov.au/</value>
+					</electronic>
+				</address>
+			</location>
+			<relatedObject>
+				<key>Web Operations Manager - Geoscience Australia</key>
+				<relation type="pointOfContact" />
+			</relatedObject>
+			<subject type="local" xml:lang="en">geoscientificInformation
+			</subject>
+			<subject type="local" xml:lang="en">geology</subject>
+			<description type="brief">The maintenance project of Geoscience
+				Australia's OneGeology data.</description>
+		</activity>
+	</registryObject>
+	<registryObject group="AuScope">
+		<key>Geoscience Victoria Seamless Geology Project</key>
+		<originatingSource>http://portal.auscope.org</originatingSource>
+		<identifier>http://gsv-ws.dpi.vic.gov.au/SeamlessGeology/wms</identifier>
+		<activity type="project">
+			<name type="primary">
+				<namePart type="text">Geoscience Victoria Seamless Geology Project
+				</namePart>
+			</name>
+			<location>
+				<address>
+					<electronic type="url">
+						<value>http://new.dpi.vic.gov.au/earth-resources/about/branches/projects/seamless-geology
+						</value>
+					</electronic>
+				</address>
+			</location>
+			<relatedObject>
+				<key>Alistair Ritchie</key>
+				<relation type="pointOfContact" />
+			</relatedObject>
+			<subject type="local" xml:lang="en">geoscientificInformation
+			</subject>
+			<subject type="local" xml:lang="en">geology</subject>
+			<description type="brief">The Seamless Geology project will
+				create a dynamic set of Victoria's geological data and ensure that
+				the states geological information assets at all key scales are the
+				most up-to-date possible. The ultimate aim is for clients located
+				anywhere in the world to be able to access our high quality
+				pre-competitive geoscientific data in a consistent format at anytime
+				via web services. The seamless data will also form the basis of the
+				surface geology for the 3D models that are being developed as a
+				component of our geological projects, including the 3D model of
+				Victoria.</description>
+		</activity>
+	</registryObject>
+</registryObjects>

@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<registryObjects>
+	<!-- manually created Activities -->
+	<!-- Geofabric Related Activity -->
+	<registryObject group="BOM">
+		<key>Australian Hydrological Geospatial Fabric (Geofabric)</key>
+		<originatingSource>ftp://ftp.bom.gov.au/anon/home/geofabric/</originatingSource>
+		<activity type="project">
+			<name type="primary">
+				<namePart type="text">Australian Hydrological Geospatial Fabric (Geofabric)</namePart>
+			</name>
+			<location>
+				<address>
+					<electronic type="url">
+						<value>http://www.bom.gov.au/water/geofabric/index.shtml</value>
+					</electronic>
+				</address>
+			</location>
+			<relatedObject>
+				<key>http://www.bom.gov.au/Geospatial Data Unit</key>
+				<relation type="pointOfContact" />
+			</relatedObject>
+			<subject type="local" xml:lang="en">auxiliary</subject> 
+			<subject type="local" xml:lang="en">Australia</subject> 
+			<subject type="local" xml:lang="en">boundaries</subject> 
+		    <subject type="local" xml:lang="en">climatologyMeteorologyAtmosphere</subject> 
+		    <subject type="local" xml:lang="en">environment</subject> 
+		    <subject type="local" xml:lang="en">inlandWaters</subject> 
+		    <subject type="local" xml:lang="en">geoscientificInformation</subject> 
+			<subject type="local" xml:lang="en">WATER-Hydrology</subject>
+			<description type="brief">The Australian Hydrological Geospatial Fabric (Geofabric) is a specialised Geographic Information System (GIS). It identifies the spatial relationships of important hydrological features such as rivers, lakes, reservoirs, dams, canals and catchments. The Geofabric will evolve in phases over 10 years. The first phase, or Version 1.0, is now available and comprises the following products:
+
+1.Geofabric Surface Cartography V1.0
+Geofabric Surface Hydrology Cartography 1:250,000 scale Version 1 
+Cartographic representation of hydrological features.
+
+2.Geofabric Surface Network V1.0
+Geofabric Surface Hydrology Network 1:250,000 scale Version 1
+Network representation of hydrological features
+
+3.Geofabric Surface Catchments V1.0
+Geofabric 9 second catchments and derived contracted catchments 1:250,000 scale Version 1 
+Contracted catchments and the underlying stream segment catchments derived from the 9 second Digital Elevation Model (DEM).
+
+Subsequent versions of the Geofabric will include upgrades to data to include:
+
+hydrometric monitoring point data
+groundwater data
+finer scales of surface water hydrology
+a drainage-enforced 1 second DEM based on the Shuttle Radar Topography Mission (SRTM) data
+a set of catchment boundaries based on the best available surface water hydrology and the 1 second DEM
+
+		</description>
+		</activity>
+	</registryObject>
+	
+	
+	<!-- BOM Catalog Related Activitivies - base on Product Program code from SIMS Catalog -->
+	
+    <!-- WAP :: Analysis and Prediction -->
+	<registryObject group="BOM">
+		<key>Analysis and Prediction</key>
+		<originatingSource>urn:bom:gov:au:program:wap</originatingSource>
+		<activity type="program">
+			<name type="primary">
+				<namePart type="text">Analysis and Prediction</namePart>
+			</name>
+			<location>
+				<address>
+					<electronic type="url">
+						<value>urn:bom:gov:au:program:wap</value>
+					</electronic>
+				</address>
+			</location>
+			<relatedObject>
+				<key>http://www.bom.gov.au/Murray Henderson</key>
+				<relation type="pointOfContact" />
+			</relatedObject>
+			<subject type="local" xml:lang="en">Atmospheric Sciences</subject>
+			<subject type="local" xml:lang="en">Meteorology</subject> 
+			<subject type="local" xml:lang="en">Climatology</subject> 
+			<subject type="local" xml:lang="en">Oceanography</subject> 
+			<subject type="local" xml:lang="en">Weather Forecasts</subject> 
+			<description type="brief">The Analysis and Prediction Program embraces the basic meteorological monitoring and prediction operations needed to support provision of climate and weather services and to fulfil Australia's international obligations under the convention of the WMO.  The program encompasses most of the activities of the National Meteorological and Oceanographic Centre NMOC), the Darwin Regional Office in its role as a Regional/Specialised Meteorological Centre (RSMC), the analysis functions of the Antarctic Meteorological Centre at Casey and includes the basic round-the-clock monitoring role of the seven RFCs.</description>
+		</activity>
+	</registryObject>
+
+		
+	<!-- Disaster Mitigation Program -->           
+	<registryObject group="BOM">
+		<key>Disaster Mitigation</key>
+		<originatingSource>urn:bom:gov:au:program:wsw</originatingSource>
+		<activity type="program">
+			<name type="primary">
+				<namePart type="text">Disaster Mitigation</namePart>
+			</name>
+			<location>
+				<address>
+					<electronic type="url">
+						<value>urn:bom:gov:au:program:wsw</value>
+					</electronic>
+				</address>
+			</location>
+			<relatedObject>
+				<key>http://www.bom.gov.au/Murray Henderson</key>
+				<relation type="pointOfContact" />
+			</relatedObject>
+			<subject type="local" xml:lang="en">Atmospheric Sciences</subject> 
+			<subject type="local" xml:lang="en">Meteorology</subject> 
+			<subject type="local" xml:lang="en">Climatology</subject> 
+			<subject type="local" xml:lang="en">Hydrology</subject> 
+			<subject type="local" xml:lang="en">Weather Forecasts</subject> 
+			<description type="brief">The Disaster Mitigation Policy Program was established within the Australian Bureau of Meteorology's Weather and Ocean Services Policy Branch in early 2003. It is a cross-cutting program that links activities with the Bureau of Meteorology's Severe Weather, Hydrology and Climate areas.</description>
+		</activity>
+	</registryObject>
+	
+	<!-- Flood Warning Service -->           
+    <registryObject group="BOM">
+		<key>Flood Warning Service</key>
+		<originatingSource>urn:bom:gov:au:program:hfw</originatingSource>
+		<activity type="program">
+			<name type="primary">
+				<namePart type="text">Flood Warning Service</namePart>
+			</name>
+			<location>
+				<address>
+					<electronic type="url">
+						<value>urn:bom:gov:au:program:hfw</value>
+					</electronic>
+				</address>
+			</location>
+			<relatedObject>
+				<key>http://www.bom.gov.au/Murray Henderson</key>
+				<relation type="pointOfContact" />
+			</relatedObject>
+			<subject type="local" xml:lang="en">Atmospheric Sciences</subject> 
+			<subject type="local" xml:lang="en">Meteorology</subject> 
+			<subject type="local" xml:lang="en">Climatology</subject> 
+			<subject type="local" xml:lang="en">Hydrology</subject> 
+			<subject type="local" xml:lang="en">Weather Observations</subject> 
+			<description type="brief">The primary function of the Flood Warning Service Program is the provision of an effective operational flood warning service in each State/Territory to reduce the risk to loss of life and property damage. Improvements to the Flood Warning Service are coordinated through each State/Territory Flood Warning Consultative Committee (or equivalent) and the service operates within established cooperative working arrangements in each State/Territory. The Flood Warning Service Program doesn't cover the whole of Australia - see http://web.bom.gov.au/nob/hydro/fwpo/projects/fw_summary/ for summary of the service provided.</description>
+		</activity>
+	</registryObject>
+
+
+<!-- Marine Weather Services -->           
+    <registryObject group="BOM">
+		<key>Marine Weather Services</key>
+		<originatingSource>urn:bom:gov:au:program:wsm</originatingSource>
+		<activity type="program">
+			<name type="primary">
+				<namePart type="text">Marine Weather Services</namePart>
+			</name>
+			<location>
+				<address>
+					<electronic type="url">
+						<value>urn:bom:gov:au:program:wsm</value>
+					</electronic>
+				</address>
+			</location>
+			<relatedObject>
+				<key>http://www.bom.gov.au/Murray Henderson</key>
+				<relation type="pointOfContact" />
+			</relatedObject>
+			<subject type="local" xml:lang="en">Atmospheric Sciences</subject> 
+			<subject type="local" xml:lang="en">Meteorology</subject> 
+			<subject type="local" xml:lang="en">Climatology</subject> 
+			<subject type="local" xml:lang="en">Marine Meteorology</subject> 
+			<subject type="local" xml:lang="en">Weather Forecasts</subject> 
+			<subject type="local" xml:lang="en">Weather Observations</subject> 
+			<description type="brief">The Marine Weather Services Program provides the Australian and international maritime communities with weather forecasts, warnings and observations for coastal waters areas and high seas around Australia.</description>
+		</activity>
+	</registryObject>
+	
+	<!-- Oceanography -->           
+    <registryObject group="BOM">
+		<key>Oceanography</key>
+		<originatingSource>urn:bom:gov:au:program:ocs</originatingSource>
+		<activity type="program">
+			<name type="primary">
+				<namePart type="text">Oceanography</namePart>
+			</name>
+			<location>
+				<address>
+					<electronic type="url">
+						<value>urn:bom:gov:au:program:ocs</value>
+					</electronic>
+				</address>
+			</location>
+			<relatedObject>
+				<key>http://www.bom.gov.au/Murray Henderson</key>
+				<relation type="pointOfContact" />
+			</relatedObject>
+			<subject type="local" xml:lang="en">Atmospheric Sciences</subject> 
+			<subject type="local" xml:lang="en">Meteorology</subject> 
+			<subject type="local" xml:lang="en">Climatology</subject> 
+			<subject type="local" xml:lang="en">Marine Meteorology</subject> 
+			<subject type="local" xml:lang="en">Oceanography</subject> 			
+			<subject type="local" xml:lang="en">Weather Forecasts</subject> 
+			<description type="brief">The Oceanography Program is responsible for development, implementation and maintenance of ocean forecast and analysis systems which support the Bureau's the operational Oceanographic Services and support for Marine Meteorology and Climate. The current suite of Oceanographic systems includes wind wave models, ocean analyses, ocean forecasting models on weekly and seasonal time scales and modelling of marine hazards such as tsunami and storm surge.</description>
+		</activity>
+	</registryObject>
+
+	<!-- Public Weather Service -->           
+    <registryObject group="BOM">
+		<key>Public Weather Service</key>
+		<originatingSource>urn:bom:gov:au:program:wsp</originatingSource>
+		<activity type="program">
+			<name type="primary">
+				<namePart type="text">Public Weather Service</namePart>
+			</name>
+			<location>
+				<address>
+					<electronic type="url">
+						<value>urn:bom:gov:au:program:wsp</value>
+					</electronic>
+				</address>
+			</location>
+			<relatedObject>
+				<key>http://www.bom.gov.au/Murray Henderson</key>
+				<relation type="pointOfContact" />
+			</relatedObject>
+			<subject type="local" xml:lang="en">Atmospheric Sciences</subject> 
+			<subject type="local" xml:lang="en">Meteorology</subject> 
+			<subject type="local" xml:lang="en">Climatology</subject> 
+			<subject type="local" xml:lang="en">Agricultural Meteorology</subject>
+			<subject type="local" xml:lang="en">Weather Forecasts</subject>
+			<subject type="local" xml:lang="en">Weather Observations</subject>
+			<description type="brief">The Bureau's Public Access Services encompass a wide range of free weather forecast, warning and information services, available to the general public on a 24 hour, seven days a week basis.
+(1) Provides the Australian community with weather forecasts, warnings and observations for all areas of Australia. 
+(2) Provides agricultural producers with weather observations, forecasts and warnings of conditions that may impact on the health of plants and animals.
+</description>
+		</activity>
+	</registryObject>
+
+
+</registryObjects>
